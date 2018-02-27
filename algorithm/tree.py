@@ -34,10 +34,23 @@ class BST(object):
         return root
 
 
-def pre_traver(root):
-    if root != None:
+def travel(root):
+    if root is not None:
         if root.left is not None:
-            pre_traver(root.left)
+            travel(root.left)
         print(root.data)
         if root.right is not None:
-            pre_traver(root.right)
+            travel(root.right)
+
+
+def binary_search(a, x, l, r):
+    if r >= l:
+        mid = l + (r - l) // 2
+        if a[mid] == x:
+            return mid
+        elif a[mid] > x:
+            return binary_search(a, x, l, mid - 1)
+        else:
+            return binary_search(a, x, mid + 1, r)
+    else:
+        return -1
