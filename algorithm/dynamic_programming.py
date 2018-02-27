@@ -104,3 +104,55 @@ def max_multiple_substring(a):
         result = max(cur_max, cur_min, result)
     return result
 
+
+def lcs(a, b):
+    dp = [[0 for i in range(len(a) + 1)] for j in range(len(b) + 1)]
+    for i in range(1, len(b) + 1):
+        for j in range(1, len(a) + 1):
+            if a[j-1] == b[i-1]:
+                dp[i][j] = dp[i-1][j-1] + 1
+            else:
+                dp[i][j] = max(dp[i-1][j], dp[i][j - 1])
+    return dp[len(b)][len(a)]
+
+
+def max_len(a, b):
+    if len(a) > len(b):
+        return a
+    else:
+        return b
+
+
+def lcs_str(a, b):
+    if len(a) == 0 or len(b) == 0:
+        return ""
+    else:
+        m = a[0]
+        n = b[0]
+        if m == n:
+            return m + lcs_str(a[1:], b[1:])
+        else:
+            return max_len(lcs_str(a[1:], b), lcs_str(a, b[1:]))
+
+
+def lcs_continues(a, b):
+    maxlen = 0
+    idx = 0
+    dp = [[0] * (len(b) + 1) for j in range(len(a) + 1)]
+    for i in range(1, len(a) + 1):
+        for j in range(0, len(b) + 1):
+            if a[i-1] == b[j-1]:
+                dp[i][j] = dp[i-1][j-1] + 1
+                if dp[i][j] > maxlen:
+                    maxlen = dp[i][j]
+                    idx = i - maxlen
+
+    return maxlen, a[idx: idx + maxlen]
+
+
+if __name__ == '__main__':
+    a = 'ABCBDAB'
+    b = 'BDCABA'
+    print(lcs(a, b))
+    print(lcs_str(a, b))
+    print(lcs_continues("ABCDEF", "EEBCDFE"))
