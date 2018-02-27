@@ -94,3 +94,13 @@ def edit_distance(s, t):
                 dp_result[j][i] = min(insert_op, delete_op, mismatch_op)
 
     return dp_result[len(t)][len(s)]
+
+
+def max_multiple_substring(a):
+    result = cur_min = cur_max = a[0]
+    for i in range(1, len(a)):
+        cur_max = max(cur_max * a[i], cur_min * a[i], a[i])
+        cur_min = min(cur_max * a[i], cur_min * a[i], a[i])
+        result = max(cur_max, cur_min, result)
+    return result
+

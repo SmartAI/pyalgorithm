@@ -6,6 +6,7 @@ from unittest import TestCase
 from algorithm import dynamic_programming
 from algorithm.dynamic_programming import knapsack
 from algorithm.dynamic_programming import edit_distance
+from algorithm.dynamic_programming import max_multiple_substring
 
 
 # @File    : test_primitive_calculator
@@ -40,4 +41,8 @@ class TestEditdistance(TestCase):
     def test1(self):
         self.assertEqual(1, edit_distance("snowy", "snow"))
 
+
+class TestMaxMultiSub(TestCase):
+    def test(self):
+        self.assertEqual(12, max_multiple_substring([-2.5, 4, 0, 3, 0.5, 8, -1]))
 
